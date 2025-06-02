@@ -25,8 +25,10 @@
 - Dark mode support
 
 ### 📝 Content Generation
-- Support for multiple platforms (Twitter, LinkedIn, Instagram, etc.)
-- Various content types (posts, threads, articles, captions)
+- Support for multiple platforms (Twitter, LinkedIn, Instagram, GitHub, etc.)
+- Various content types (posts, threads, articles, captions, repository descriptions)
+- GitHub repository analysis and content generation
+- Intelligent tag and description generation for repositories
 - Customizable tone and style
 - Target audience optimization
 - Goal-oriented content creation
@@ -65,6 +67,8 @@ pip install -e .
 cat << EOF > .env
 OPENAI_API_KEY=your_key_here
 MODEL=gpt-4-turbo-preview
+# Optional: Add GitHub token for private repository access
+GITHUB_TOKEN=your_github_token_here
 EOF
 ```
 
@@ -80,19 +84,35 @@ Visit `http://localhost:8000` in your browser to start generating content!
 ## 🏗️ Project Structure
 
 ```
-src/pitch/
-├── api.py              # FastAPI application and endpoints
-├── crew.py            # AI agents configuration
-├── status_manager.py  # WebSocket status updates
-├── config/           # Configuration files
-│   ├── agents.yaml   # Agent definitions
-│   └── tasks.yaml    # Task definitions
-├── static/           # Web interface
-│   ├── index.html
-│   ├── script.js
-│   └── styles.css
-└── tools/            # Agent tools
-    └── serper_tool.py
+.
+├── .env               # Environment variables configuration
+├── .gitignore        # Git ignore rules
+├── monitor.py        # WebSocket monitoring utility
+├── pyproject.toml    # Project configuration and dependencies
+├── README.md         # Project documentation
+├── report.md         # Documentation and reports
+├── sample.pdf        # Sample document for testing
+├── uv.lock           # Dependency lock file
+└── src/
+    └── pitch/
+        ├── __init__.py         # Package initialization
+        ├── api.py              # FastAPI application and endpoints
+        ├── crew.py             # Content generation crew setup
+        ├── main.py             # CLI and server entry points
+        ├── status_manager.py   # Real-time status updates via WebSocket
+        ├── config/
+        │   ├── agents.yaml     # Agent roles and behaviors
+        │   └── tasks.yaml      # Task definitions and workflows
+        ├── static/
+        │   ├── index.html      # Responsive UI with dynamic forms
+        │   ├── script.js       # Client-side logic and WebSocket handling
+        │   └── styles.css      # Markdown and UI styling
+        └── tools/
+            ├── __init__.py        # Tools package initialization
+            ├── custom_tool.py     # Base tool template
+            ├── document_tools.py  # Document parsing utilities
+            ├── github_tool.py     # GitHub repository analysis
+            └── serper_tool.py     # Web research capabilities
 ```
 
 ## 🔧 Configuration
@@ -122,6 +142,7 @@ content_strategy_task:
 
 ## 📝 Usage Example
 
+### Regular Content Generation
 1. Select your target platform (e.g., Twitter, LinkedIn)
 2. Choose content type (post, thread, article)
 3. Enter your topic and goals
@@ -129,6 +150,15 @@ content_strategy_task:
 5. Generate content
 6. Review and provide feedback if needed
 7. Copy and use your optimized content!
+
+### GitHub Repository Content
+1. Select GitHub as the platform
+2. Choose content type (description or tags)
+3. Enter the repository URL
+4. (Optional) Provide GitHub token for private repositories
+5. Set tone and target audience
+6. Generate repository-specific content
+7. Review and use the optimized description or tags
 
 ## 🤝 Contributing
 
