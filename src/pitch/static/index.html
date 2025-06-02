@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-12 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <i class="fas fa-pencil-alt text-4xl text-blue-600 mr-3"></i>
+                <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                    Content Generator
+                </h1>
+            </div>
+            <p class="text-gray-600 text-lg">AI-powered content creation for any platform</p>
+        </header>
+
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8 transform transition-all hover:shadow-xl">
+                <form id="contentForm" class="space-y-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Platform</label>
+                            <select name="platform" required
+                                class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                    focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                                <option value="">Select Platform</option>
+                                <option value="twitter">Twitter</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="blog">Blog</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700">Content Type</label>
+                            <select name="content_type" required
+                                class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                    focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                                <option value="">Select Type</option>
+                                <option value="post">Post</option>
+                                <option value="thread">Thread</option>
+                                <option value="article">Article</option>
+                                <option value="caption">Caption</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Topic</label>
+                        <input type="text" name="topic" required
+                            class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                focus:border-blue-500 focus:ring-blue-500 transition-colors" 
+                            placeholder="What's your content about?">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Tone</label>
+                        <select name="tone" required
+                            class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                            <option value="">Select Tone</option>
+                            <option value="professional">Professional</option>
+                            <option value="casual">Casual</option>
+                            <option value="humorous">Humorous</option>
+                            <option value="educational">Educational</option>
+                            <option value="inspirational">Inspirational</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Target Audience</label>
+                        <input type="text" name="target_audience" required
+                            class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                focus:border-blue-500 focus:ring-blue-500 transition-colors" 
+                            placeholder="Who is this content for?">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Content Goals</label>
+                        <textarea name="content_goals" required rows="3"
+                            class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                focus:border-blue-500 focus:ring-blue-500 transition-colors"
+                            placeholder="What do you want to achieve with this content?"></textarea>
+                    </div>
+
+                    <div id="feedbackSection" class="hidden">
+                        <label class="block text-sm font-semibold text-gray-700">Feedback for Improvement</label>
+                        <textarea name="feedback" rows="3"
+                            class="mt-2 block w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                                focus:border-blue-500 focus:ring-blue-500 transition-colors"
+                            placeholder="How can we improve the previous content?"></textarea>
+                    </div>
+
+                    <div>
+                        <button type="submit" 
+                            class="w-full flex items-center justify-center py-3 px-6 
+                                border border-transparent rounded-lg text-base font-medium text-white 
+                                bg-gradient-to-r from-blue-600 to-indigo-600 
+                                hover:from-blue-700 hover:to-indigo-700 
+                                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                                transform transition-all hover:scale-[1.02]">
+                            <i class="fas fa-magic mr-2"></i>
+                            Generate Content
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="status" class="mt-8 hidden">
+                <div class="space-y-6">
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="loading-spinner"></div>
+                                <span id="status-message" class="text-sm font-medium text-gray-700"></span>
+                            </div>
+                            <span id="progress-percentage" class="text-sm font-semibold text-blue-600">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-3 rounded-full progress-transition w-0" 
+                                id="progress-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Agent Activities Log -->
+                    <div id="agent-log" class="bg-white rounded-xl shadow-lg p-6 max-h-[400px] overflow-y-auto">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-semibold text-gray-900 flex items-center">
+                                <i class="fas fa-tasks mr-2 text-blue-500"></i>
+                                Generation Progress
+                            </h4>
+                            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                                <i class="far fa-clock"></i>
+                                <span id="elapsed-time">00:00</span>
+                            </div>
+                        </div>
+                        <div id="log-entries" class="space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="result" class="mt-8 hidden">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 flex items-center">
+                                <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+                                Generated Content
+                            </h3>
+                            <p class="text-sm text-gray-500 mt-1">Your content is ready to use</p>
+                        </div>
+                        <div class="space-x-2">
+                            <button id="regenButton" onclick="showFeedbackForm()"
+                                class="inline-flex items-center px-4 py-2 rounded-lg
+                                    text-blue-600 bg-blue-50 hover:bg-blue-100
+                                    transform transition-all hover:scale-[1.02]">
+                                <i class="fas fa-redo mr-2"></i>
+                                Regenerate
+                            </button>
+                            <button id="copyButton" onclick="copyContent()"
+                                class="inline-flex items-center px-4 py-2 rounded-lg
+                                    text-white bg-gradient-to-r from-blue-600 to-indigo-600
+                                    hover:from-blue-700 hover:to-indigo-700
+                                    transform transition-all hover:scale-[1.02]">
+                                <i class="fas fa-copy mr-2"></i>
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <pre id="result-content" class="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div id="toast" class="toast" role="alert">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <span id="toast-message"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+content_strategy_task:
+  description: >
+    Plan content strategy for {platform} based on:
+    1. Platform: {platform}
+    2. Content Type: {content_type}
+    3. Topic: {topic}
+    4. Tone: {tone}
+    5. Target Audience: {target_audience}
+    6. Goals: {content_goals}
+  expected_output: >
+    A detailed content strategy including tone, structure, and key points to cover
+  agent: content_strategist
+
+content_creation_task:
+  description: >
+    Create content following the strategy for {platform} that:
+    1. Matches the defined tone and style
+    2. Is optimized for the platform
+    3. Incorporates key messages and points
+    4. Follows platform best practices
+    5. Includes relevant hashtags or keywords
+  expected_output: >
+    Platform-optimized content ready for review
+  agent: content_creator
+
+content_optimization_task:
+  description: >
+    Optimize the content based on:
+    1. User feedback: {feedback}
+    2. Platform requirements
+    3. Engagement goals
+    4. Best practices
+    5. SEO guidelines (if applicable)
+  expected_output: >
+    Refined and optimized content incorporating feedback
+  agent: content_optimizer
