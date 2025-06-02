@@ -97,9 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Copy content to clipboard
     window.copyContent = async () => {
-        const content = resultContent.textContent;
+        const rawContent = document.getElementById('raw-content');
         try {
-            await navigator.clipboard.writeText(content);
+            await navigator.clipboard.writeText(rawContent.textContent);
             showToast('Content copied to clipboard!', 'success');
         } catch (err) {
             showToast('Failed to copy content', 'error');
@@ -214,7 +214,84 @@ document.addEventListener('DOMContentLoaded', () => {
                         progressPercentage.textContent = '100%';
                         // Show results
                         resultDiv.classList.remove('hidden');
-                        resultContent.textContent = status.result;
+                        const rawContent = document.getElementById('raw-content');
+                        rawContent.textContent = status.result;
+                        
+                        // Parse and render markdown
+                        try {
+                            // Configure marked for GitHub-flavored markdown
+                            marked.setOptions({
+                                gfm: true,
+                                breaks: true,
+                                headerIds: true,
+                                mangle: false,
+                                highlight: function(code, lang) {
+                                    if (lang && hljs.getLanguage(lang)) {
+                                        try {
+                                            return hljs.highlight(code, { language: lang }).value;
+                                        } catch (err) {}
+                                    }
+                                    return code;
+                                }
+                            });
+                            
+                            // Parse markdown and sanitize HTML
+                            const parsedContent = marked.parse(status.result);
+                            const sanitizedContent = DOMPurify.sanitize(parsedContent, {
+                                ADD_TAGS: ['iframe'],  // Allow iframes for embedded content
+                                ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
+                            });
+                            
+                            // Update the content
+                            resultContent.innerHTML = sanitizedContent;
+                            
+                            // Add click-to-copy for code blocks
+                            resultContent.querySelectorAll('pre').forEach(block => {
+                                // Create copy button
+                                const copyBtn = document.createElement('button');
+                                copyBtn.className = 'copy-button absolute right-2 top-2 text-xs px-2 py-1 rounded bg-gray-700 text-white opacity-0 transition-opacity hover:bg-gray-600';
+                                copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                                
+                                // Set relative positioning on pre element
+                                block.style.position = 'relative';
+                                block.appendChild(copyBtn);
+                                
+                                // Show/hide button on hover
+                                block.addEventListener('mouseenter', () => copyBtn.style.opacity = '1');
+                                block.addEventListener('mouseleave', () => copyBtn.style.opacity = '0');
+                                
+                                // Copy functionality
+                                copyBtn.addEventListener('click', async () => {
+                                    const code = block.querySelector('code')?.innerText || block.innerText;
+                                    await navigator.clipboard.writeText(code);
+                                    copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                                    setTimeout(() => {
+                                        copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                                    }, 2000);
+                                });
+                            });
+                            
+                            // Add target="_blank" to external links
+                            resultContent.querySelectorAll('a').forEach(link => {
+                                if (link.host !== window.location.host) {
+                                    link.setAttribute('target', '_blank');
+                                    link.setAttribute('rel', 'noopener noreferrer');
+                                }
+                            });
+                            
+                            // Initialize tooltips for links
+                            resultContent.querySelectorAll('a[title]').forEach(link => {
+                                link.className += ' relative group';
+                                const tooltip = document.createElement('span');
+                                tooltip.className = 'absolute hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2 -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap';
+                                tooltip.textContent = link.title;
+                                link.appendChild(tooltip);
+                            });
+                        } catch (e) {
+                            console.error('Error rendering markdown:', e);
+                            resultContent.textContent = status.result;
+                        }
+                        
                         showToast('Content generated successfully', 'success');
                         stopTimer();
                         socket.close();

@@ -7,10 +7,8 @@ content_strategy_task:
     4. Tone: {tone}
     5. Target Audience: {target_audience}
     6. Goals: {content_goals}
-    7. GitHub Repository: {repo_url} (if applicable)
   expected_output: >
     A detailed content strategy including tone, structure, and key points to cover.
-    For GitHub repositories, analyze the codebase and generate appropriate content.
   agent: content_strategist
 
 content_creation_task:

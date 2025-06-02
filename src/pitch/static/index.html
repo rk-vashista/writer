@@ -6,7 +6,11 @@
     <title>Content Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <link href="/static/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.11/dist/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen">
     <div class="container mx-auto px-4 py-8">
@@ -206,7 +210,8 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg p-6">
-                        <pre id="result-content" class="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed"></pre>
+                        <div id="result-content" class="markdown-body text-sm text-gray-700 prose prose-sm max-w-none"></div>
+                        <pre id="raw-content" class="hidden"></pre>
                     </div>
                 </div>
             </div>

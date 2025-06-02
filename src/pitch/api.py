@@ -60,11 +60,12 @@ async def generate_content(
             'job_id': job_id
         }
 
-        # Add GitHub specific inputs if platform is GitHub
+        # Handle GitHub-specific inputs
         if platform == 'github':
             if not repo_url:
                 raise ValueError("Repository URL is required for GitHub content generation")
             inputs['repo_url'] = repo_url
+            inputs['description'] = f"... and analyze GitHub repository: {repo_url}"
             if github_token:
                 os.environ['GITHUB_TOKEN'] = github_token
         
