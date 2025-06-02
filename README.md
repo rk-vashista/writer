@@ -1,95 +1,151 @@
-# Pitch Deck Analyzer
+# 🎯 AI Content Generator
 
-A powerful web application built with FastAPI and crewAI for analyzing startup pitch decks using AI agents. This tool helps investors and analysts evaluate pitch decks by providing comprehensive analysis, industry research, and due diligence reports.
+<div align="center">
 
-## Features
 
-- **Modern Web Interface**
-  - Responsive design with Tailwind CSS
-  - Real-time progress tracking
-  - Drag-and-drop file upload
-  - Interactive progress visualization
-  - Toast notifications
-  - Beautiful animated UI elements
 
-- **Document Analysis**
-  - Support for PDF and PPT/PPTX files
-  - Automatic text extraction
-  - Smart content analysis
+</div>
 
-- **Multi-Agent Analysis**
-  - Pitch Deck Analyst: Evaluates business model, financials, and team
-  - Industry Researcher: Analyzes market trends and competition
-  - Due Diligence Analyst: Validates claims and identifies risks
 
-- **Real-time Updates**
-  - WebSocket-based progress tracking
-  - Detailed task progress logging
-  - Elapsed time monitoring
-  - Status notifications
 
-## Installation
+> A powerful AI-driven content generation platform that creates engaging, platform-optimized content using intelligent agents.
 
-1. Ensure you have Python >=3.10 <3.13 installed.
+## ✨ Features
 
-2. Clone the repository and set up your virtual environment:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
+### 🤖 Multi-Agent Content Creation
+- **Content Strategist**: Plans and structures content strategy
+- **Content Creator**: Generates engaging platform-specific content
+- **Content Optimizer**: Refines and optimizes based on feedback
 
-3. Install dependencies:
-   ```bash
-   pip install uv
-   uv pip install -e .
-   ```
+### 🎨 Modern Web Interface
+- Beautiful, responsive design with Tailwind CSS
+- Real-time progress tracking with WebSocket updates
+- Interactive progress visualization
+- Toast notifications
+- Dark mode support
 
-4. Set up environment variables:
-   - Create a `.env` file in the project root
-   - Add your OpenAI API key:
-     ```
-     OPENAI_API_KEY=your_key_here
-     ```
+### 📝 Content Generation
+- Support for multiple platforms (Twitter, LinkedIn, Instagram, etc.)
+- Various content types (posts, threads, articles, captions)
+- Customizable tone and style
+- Target audience optimization
+- Goal-oriented content creation
 
-## Usage
+### 🔄 Feedback Loop
+- Instant content regeneration
+- User feedback incorporation
+- Continuous content improvement
+- Platform-specific best practices
 
-1. Start the server:
-   ```bash
-   uvicorn pitch.api:app --reload --host 0.0.0.0 --port 8000
-   ```
+## 🚀 Quick Start
 
-2. Open your browser and navigate to `http://localhost:8000`
+### Prerequisites
+- Python >=3.10,<3.13
+- OpenAI API key
 
-3. Enter your startup name and upload your pitch deck (PDF/PPT/PPTX)
+### Installation
 
-4. Monitor the analysis progress in real-time
+1. Clone the repository and set up your environment:
+```bash
+git clone https://github.com/rk-vashista/writer
+cd writer
+python -m venv .venv
+source .venv/bin/activate 
+# On Windows: .venv\Scripts\activate
+```
 
-5. View and download the comprehensive analysis report
+2. Install dependencies:
+```bash
+pip install -e .
+```
 
-## Project Structure
+3. Set up environment variables:
+```bash
+# Create .env file
+cat << EOF > .env
+OPENAI_API_KEY=your_key_here
+MODEL=gpt-4-turbo-preview
+EOF
+```
+
+### Running the Application
+
+Start the server:
+```bash
+uvicorn pitch.api:app --reload --host 0.0.0.0 --port 8000
+```
+
+Visit `http://localhost:8000` in your browser to start generating content!
+
+## 🏗️ Project Structure
 
 ```
 src/pitch/
-├── api.py          # FastAPI application and endpoints
-├── crew.py         # AI agents configuration and crew setup
-├── status_manager.py # WebSocket-based status updates
-├── config/         # YAML configurations for agents and tasks
-├── static/         # Web interface files (HTML, CSS, JS)
-└── tools/          # Analysis tools and utilities
+├── api.py              # FastAPI application and endpoints
+├── crew.py            # AI agents configuration
+├── status_manager.py  # WebSocket status updates
+├── config/           # Configuration files
+│   ├── agents.yaml   # Agent definitions
+│   └── tasks.yaml    # Task definitions
+├── static/           # Web interface
+│   ├── index.html
+│   ├── script.js
+│   └── styles.css
+└── tools/            # Agent tools
+    └── serper_tool.py
 ```
 
-## Configuration
+## 🔧 Configuration
 
-- Modify `src/pitch/config/agents.yaml` to customize agent behaviors
-- Adjust `src/pitch/config/tasks.yaml` to define analysis tasks
-- Update `src/pitch/crew.py` to add custom tools or modify agent logic
-- Fine-tune the UI in `src/pitch/static/`
+### Customizing Agents
+Edit `src/pitch/config/agents.yaml` to modify agent behaviors:
+```yaml
+content_strategist:
+  role: Expert Content Strategist
+  goal: Plan and structure content
+  # ...
 
-## Contributing
+content_creator:
+  role: Creative Content Writer
+  goal: Create engaging content
+  # ...
+```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Customizing Tasks
+Edit `src/pitch/config/tasks.yaml` to define task workflows:
+```yaml
+content_strategy_task:
+  description: Plan content strategy...
+  expected_output: Detailed content strategy
+  # ...
+```
 
-## Support
+## 📝 Usage Example
 
-For questions or feedback:
-- Check out [crewAI documentation](https://docs.crewai.com)
+1. Select your target platform (e.g., Twitter, LinkedIn)
+2. Choose content type (post, thread, article)
+3. Enter your topic and goals
+4. Set tone and target audience
+5. Generate content
+6. Review and provide feedback if needed
+7. Copy and use your optimized content!
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with [crewAI](https://github.com/joaomdmoura/crewAI)
+- UI powered by [Tailwind CSS](https://tailwindcss.com)
+- Developed with [FastAPI](https://fastapi.tiangolo.com)
+
+---
+
+<div align="center">
+Made with ❤️ by content creators, for content creators
+</div>
