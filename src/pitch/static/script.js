@@ -1,3 +1,53 @@
+// Function to handle platform selection changes
+function handlePlatformChange(platform) {
+    const githubFields = document.getElementById('githubFields');
+    const contentTypeSelect = document.getElementById('content-type-select');
+    
+    // Show/hide GitHub-specific fields
+    if (githubFields) {
+        if (platform === 'github') {
+            githubFields.classList.remove('hidden');
+        } else {
+            githubFields.classList.add('hidden');
+        }
+    }
+
+    // Handle content type options
+    if (contentTypeSelect) {
+        const options = contentTypeSelect.options;
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const type = option.getAttribute('data-type');
+            
+            if (type === 'all' || 
+                (platform === 'github' && type === 'github') || 
+                (platform !== 'github' && type === 'regular')) {
+                option.style.display = '';
+            } else {
+                option.style.display = 'none';
+            }
+        }
+        contentTypeSelect.value = '';
+    }
+}
+
+// Function to toggle GitHub token visibility
+function toggleTokenVisibility() {
+    const tokenInput = document.getElementById('githubToken');
+    const tokenIcon = document.getElementById('tokenVisibilityIcon');
+    if (tokenInput.type === 'password') {
+        tokenInput.type = 'text';
+        tokenIcon.classList.remove('fa-eye');
+        tokenIcon.classList.add('fa-eye-slash');
+    } else {
+        tokenInput.type = 'password';
+        tokenIcon.classList.remove('fa-eye-slash');
+        tokenIcon.classList.add('fa-eye');
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contentForm');
     const statusDiv = document.getElementById('status');

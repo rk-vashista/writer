@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocket, BackgroundTasks, Form
+from fastapi import FastAPI, WebSocket, BackgroundTasks, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -32,6 +32,8 @@ async def generate_content(
     tone: str,
     target_audience: str,
     content_goals: str,
+    github_token: str = None,
+    repo_url: str = None,
     feedback: str = None
 ):
     """Background task to generate content"""
@@ -57,6 +59,14 @@ async def generate_content(
             'feedback': feedback,
             'job_id': job_id
         }
+
+        # Add GitHub specific inputs if platform is GitHub
+        if platform == 'github':
+            if not repo_url:
+                raise ValueError("Repository URL is required for GitHub content generation")
+            inputs['repo_url'] = repo_url
+            if github_token:
+                os.environ['GITHUB_TOKEN'] = github_token
         
         print(f"\nStarting content generation with:")
         print(f"- Platform: {platform}")
@@ -65,6 +75,8 @@ async def generate_content(
         print(f"- Tone: {tone}")
         print(f"- Target Audience: {target_audience}")
         print(f"- Goals: {content_goals}")
+        if platform == 'github':
+            print(f"- GitHub Repo: {repo_url}")
         if feedback:
             print(f"- Feedback: {feedback}")
 
@@ -96,6 +108,10 @@ async def generate_content(
             "status": "error",
             "message": f"Error during content generation: {str(e)}"
         })
+    finally:
+        # Clear GitHub token from environment if it was set
+        if platform == 'github' and github_token:
+            os.environ.pop('GITHUB_TOKEN', None)
 
 @app.post("/generate")
 async def create_content(
@@ -106,11 +122,20 @@ async def create_content(
     tone: str = Form(...),
     target_audience: str = Form(...),
     content_goals: str = Form(...),
+    github_token: Optional[str] = Form(None),
+    repo_url: Optional[str] = Form(None),
     feedback: Optional[str] = Form(None)
 ):
     """
     Generate content based on provided parameters
     """
+    # Validate GitHub inputs
+    if platform == 'github':
+        if not repo_url:
+            raise HTTPException(status_code=400, detail="Repository URL is required for GitHub content")
+        if not repo_url.startswith(('http://', 'https://')):
+            raise HTTPException(status_code=400, detail="Invalid repository URL")
+
     # Generate job ID
     job_id = str(uuid.uuid4())
 
@@ -124,6 +149,8 @@ async def create_content(
         tone=tone,
         target_audience=target_audience,
         content_goals=content_goals,
+        github_token=github_token,
+        repo_url=repo_url,
         feedback=feedback
     )
 
