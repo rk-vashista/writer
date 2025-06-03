@@ -4,7 +4,7 @@ import warnings
 import uvicorn
 from datetime import datetime
 
-from pitch.crew import Pitch
+from .crew import Pitch
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
