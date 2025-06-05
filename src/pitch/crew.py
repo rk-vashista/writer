@@ -297,7 +297,7 @@ class ContentGenerator():
             # ✨ PHASE 3: CONTENT ENHANCEMENT (Apply research to improve content)
             self.content_optimization_task(),    # Apply research to enhance content
             
-            # 🎨 PHASE 4: FINAL POLISH (Make it perfect)
+            # 🎨 PHASE 4: FINAL CONTENT DELIVERY (MUST BE LAST!)
             self.quality_assurance_task(),       # Final quality check with enhanced content
         ]
         
@@ -311,21 +311,18 @@ class ContentGenerator():
             # Insert after market analysis but before content optimization
             task_list = task_list[:3] + github_tasks + task_list[3:]
         
-        # 📊 PHASE 5: STRATEGY & PLANNING (Comes after content delivery - optional for users)
-        task_list.extend([
-            self.content_strategy_task(),        # Strategy analysis (post-content)
-            self.seo_optimization_task(),        # SEO optimization
-            self.brand_voice_calibration_task(), # Brand voice refinement
-            self.viral_potential_analysis_task(), # Viral potential analysis
-            self.performance_planning_task()     # Future planning recommendations
-        ])
-        
         # Add feedback-based tasks if feedback is provided
         if feedback and feedback.strip():
             task_list.extend([
                 self.feedback_analysis_task(),
                 self.content_iteration_task()
             ])
+        
+        # NOTE: Performance planning, SEO, viral analysis etc. are REMOVED from default flow
+        # These were causing strategy/analysis outputs instead of actual content
+        # The quality_assurance_task is the FINAL task that delivers the actual content
+        
+        return task_list
         
         return task_list
 

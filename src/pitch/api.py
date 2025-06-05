@@ -88,8 +88,70 @@ async def generate_content(
             dynamic_crew = generator.create_dynamic_crew(platform=platform, feedback=feedback, quick_mode=quick_mode)
             result = dynamic_crew.kickoff(inputs=inputs)
             
-            # Convert CrewOutput to string if needed
-            result_text = str(result) if result else ""
+            # Extract the actual content from CrewOutput
+            result_text = ""
+            
+            # Debug: Print CrewOutput structure
+            print(f"\n🔍 Debug - Result type: {type(result)}")
+            print(f"🔍 Debug - Result attributes: {dir(result)}")
+            
+            # Try to get the actual content from the last task (quality_assurance_task)
+            if hasattr(result, 'tasks_output') and result.tasks_output:
+                print(f"🔍 Debug - Found {len(result.tasks_output)} task outputs")
+                
+                # Get the last task output (should be quality_assurance_task with final content)
+                last_task_output = result.tasks_output[-1]
+                print(f"🔍 Debug - Last task: {getattr(last_task_output, 'name', 'unknown')}")
+                
+                # Try different attributes to get the actual content
+                if hasattr(last_task_output, 'raw') and last_task_output.raw:
+                    result_text = last_task_output.raw
+                elif hasattr(last_task_output, 'output') and last_task_output.output:
+                    result_text = last_task_output.output
+                elif hasattr(last_task_output, 'result') and last_task_output.result:
+                    result_text = last_task_output.result
+                else:
+                    result_text = str(last_task_output)
+                    
+                print(f"🔍 Debug - Last task content preview: {result_text[:100]}...")
+                
+                # If the last task doesn't have content, try the second-to-last (content_optimization_task)
+                if len(result_text.strip()) < 100 and len(result.tasks_output) > 1:
+                    print("🔍 Debug - Last task output too short, trying previous task...")
+                    second_last_output = result.tasks_output[-2]
+                    
+                    if hasattr(second_last_output, 'raw') and second_last_output.raw:
+                        result_text = second_last_output.raw
+                    elif hasattr(second_last_output, 'output') and second_last_output.output:
+                        result_text = second_last_output.output
+                    elif hasattr(second_last_output, 'result') and second_last_output.result:
+                        result_text = second_last_output.result
+                        
+                    print(f"🔍 Debug - Second-to-last task content preview: {result_text[:100]}...")
+            
+            # Fallback to raw attribute
+            if not result_text or len(result_text.strip()) < 100:
+                if hasattr(result, 'raw'):
+                    result_text = result.raw
+                else:
+                    result_text = str(result) if result else ""
+            
+            print(f"🔍 Debug - Result content preview: {result_text[:100]}...")
+            
+            # Ensure we have actual content, not just task descriptions
+            if not result_text or len(result_text.strip()) < 50:
+                result_text = "Content generation completed, but no substantial output was returned. Please try again with different parameters."
+            
+            # Check if the result looks like a task description instead of content
+            if any(phrase in result_text.lower() for phrase in [
+                'performance benchmarks', 'key performance indicators', 
+                'strategic actions', 'outlined', 'analysis', 'recommendations'
+            ]):
+                print("⚠️ Warning: Result appears to be strategy/analysis instead of content")
+                result_text = f"⚠️ SYSTEM ERROR: The AI returned strategy analysis instead of actual content.\n\nReceived: {result_text}\n\nPlease try again - the system should deliver ready-to-publish content, not analysis."
+            
+            print(f"\n✅ Final result length: {len(result_text)} characters")
+            print(f"✅ Final result preview: {result_text[:200]}...")
             
             # Send completion status
             await status_manager.broadcast_status(job_id, {
