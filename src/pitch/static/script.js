@@ -225,6 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 breaks: true,
                                 headerIds: true,
                                 mangle: false,
+                                pedantic: false,
+                                sanitize: false,
+                                smartLists: true,
+                                smartypants: true,
                                 highlight: function(code, lang) {
                                     if (lang && hljs.getLanguage(lang)) {
                                         try {
@@ -235,15 +239,51 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }
                             });
                             
+                            // Pre-process content for better emoji and formatting
+                            let processedContent = status.result
+                                // Ensure proper spacing around emojis
+                                .replace(/([🎯📝📰🏷️📢🚀💡✨🔥👥📊📈📌🎨💪🌟⭐])/g, ' $1 ')
+                                // Clean up extra spaces
+                                .replace(/\s+/g, ' ')
+                                // Ensure proper markdown formatting for special sections
+                                .replace(/^(##\s*[🎯📝📰🏷️📢🚀💡✨🔥👥📊📈📌🎨💪🌟⭐])/gm, '\n$1')
+                                // Add spacing after section headers
+                                .replace(/^(##\s*.+)$/gm, '$1\n');
+                            
                             // Parse markdown and sanitize HTML
-                            const parsedContent = marked.parse(status.result);
+                            const parsedContent = marked.parse(processedContent);
                             const sanitizedContent = DOMPurify.sanitize(parsedContent, {
-                                ADD_TAGS: ['iframe'],  // Allow iframes for embedded content
-                                ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
+                                ADD_TAGS: ['iframe', 'details', 'summary'],
+                                ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'open']
                             });
                             
                             // Update the content
                             resultContent.innerHTML = sanitizedContent;
+                            
+                            // Post-process for enhanced styling
+                            resultContent.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
+                                if (heading.textContent.includes('🚀') || heading.textContent.includes('IMMEDIATE')) {
+                                    heading.classList.add('highlight-box');
+                                }
+                            });
+                            
+                            // Add special styling to content sections
+                            resultContent.querySelectorAll('h2').forEach(h2 => {
+                                const nextSibling = h2.nextElementSibling;
+                                if (nextSibling && (nextSibling.tagName === 'P' || nextSibling.tagName === 'UL' || nextSibling.tagName === 'OL')) {
+                                    const wrapper = document.createElement('div');
+                                    wrapper.className = 'content-section';
+                                    h2.parentNode.insertBefore(wrapper, h2);
+                                    wrapper.appendChild(h2);
+                                    
+                                    let currentElement = nextSibling;
+                                    while (currentElement && currentElement.tagName !== 'H1' && currentElement.tagName !== 'H2') {
+                                        const nextEl = currentElement.nextElementSibling;
+                                        wrapper.appendChild(currentElement);
+                                        currentElement = nextEl;
+                                    }
+                                }
+                            });
                             
                             // Add click-to-copy for code blocks
                             resultContent.querySelectorAll('pre').forEach(block => {

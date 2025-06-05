@@ -28,38 +28,38 @@ quick_content_creation_task:
     
     DO NOT provide analysis, strategy, or recommendations - CREATE THE ACTUAL CONTENT.
   expected_output: >
-    🚀 IMMEDIATE PUBLICATION PACKAGE:
+    # 🚀 IMMEDIATE PUBLICATION PACKAGE
     
-    ===== MAIN CONTENT =====
+    ## 📝 MAIN CONTENT
     [Complete, ready-to-publish content piece that user can copy/paste immediately]
     
-    ===== HEADLINE OPTIONS =====
-    1. [Primary headline - most engaging]
+    ## 📰 HEADLINE OPTIONS
+    1. **[Primary headline - most engaging]**
     2. [Alternative headline - different angle]
     3. [Curiosity-driven headline]
     4. [Benefit-focused headline]
     5. [Urgency-based headline]
     
-    ===== HASHTAGS & KEYWORDS =====
-    Primary: [most important hashtags for reach]
-    Secondary: [supporting hashtags for engagement]
-    Niche: [specific community hashtags]
+    ## 🏷️ HASHTAGS & KEYWORDS
+    **Primary:** [most important hashtags for reach]
+    **Secondary:** [supporting hashtags for engagement]
+    **Niche:** [specific community hashtags]
     
-    ===== CALL-TO-ACTION OPTIONS =====
-    1. [Direct action CTA]
+    ## 📢 CALL-TO-ACTION OPTIONS
+    1. **[Direct action CTA]**
     2. [Engagement-focused CTA]
     3. [Value-driven CTA]
     
-    ===== PLATFORM OPTIMIZATION =====
-    - Best posting time: [time recommendation]
-    - Visual suggestions: [image/video recommendations]
-    - Engagement strategy: [how to maximize interaction]
+    ## ⚡ PLATFORM OPTIMIZATION
+    - **Best posting time:** [time recommendation]
+    - **Visual suggestions:** [image/video recommendations]
+    - **Engagement strategy:** [how to maximize interaction]
     
-    ===== CONTENT VARIATIONS =====
-    Version A: [Main version]
-    Version B: [Alternative approach for A/B testing]
+    ## 🧪 CONTENT VARIATIONS
+    **Version A:** [Main version]
+    **Version B:** [Alternative approach for A/B testing]
     
-    This is ACTUAL CONTENT ready for immediate publication - not strategy or analysis.
+    > ✅ This is ACTUAL CONTENT ready for immediate publication - not strategy or analysis.
   agent: content_creator
 
 # Phase 1: Research & Strategy Development
@@ -295,41 +295,41 @@ content_optimization_task:
     CRITICAL: You must output the actual IMPROVED CONTENT, not analysis.
     Rewrite and enhance the content to be significantly better.
   expected_output: >
-    🚀 ENHANCED CONTENT PACKAGE (Improved Version):
+    # 🚀 ENHANCED CONTENT PACKAGE (Improved Version)
     
-    ===== OPTIMIZED MAIN CONTENT =====
+    ## 📝 OPTIMIZED MAIN CONTENT
     [Significantly improved version of the initial content - ready to publish]
     
-    ===== ENHANCED HEADLINES =====
-    1. [Psychologically optimized headline]
+    ## 🎯 ENHANCED HEADLINES
+    1. **[Psychologically optimized headline]**
     2. [Data-driven alternative]
     3. [Audience-specific version]
     4. [Algorithm-optimized version]
     5. [Conversion-focused headline]
     
-    ===== ADVANCED HASHTAG STRATEGY =====
-    Trending: [current trending hashtags]
-    Niche: [community-specific tags]
-    Branded: [brand/campaign hashtags]
-    Long-tail: [specific audience hashtags]
+    ## 🏷️ ADVANCED HASHTAG STRATEGY
+    **Trending:** [current trending hashtags]
+    **Niche:** [community-specific tags]
+    **Branded:** [brand/campaign hashtags]
+    **Long-tail:** [specific audience hashtags]
     
-    ===== SOPHISTICATED CTAs =====
-    1. [Psychology-based CTA]
+    ## 📢 SOPHISTICATED CTAs
+    1. **[Psychology-based CTA]**
     2. [Urgency-driven CTA]
     3. [Community-building CTA]
     4. [Value-stacking CTA]
     
-    ===== AUDIENCE VARIATIONS =====
-    Version 1: [For primary audience segment]
-    Version 2: [For secondary audience segment]
-    Version 3: [For niche audience segment]
+    ## 👥 AUDIENCE VARIATIONS
+    **Version 1:** [For primary audience segment]
+    **Version 2:** [For secondary audience segment]
+    **Version 3:** [For niche audience segment]
     
-    ===== ENGAGEMENT STRATEGY =====
-    - Optimal posting timing based on audience data
-    - Engagement hooks for comments/shares
-    - Follow-up content recommendations
+    ## ⚡ ENGAGEMENT STRATEGY
+    - **Optimal posting timing:** based on audience data
+    - **Engagement hooks:** for comments/shares
+    - **Follow-up content:** recommendations
     
-    This is the IMPROVED, RESEARCH-ENHANCED content ready for publication.
+    > ✅ This is the IMPROVED, RESEARCH-ENHANCED content ready for publication.
   agent: content_optimizer
   context: [quick_content_creation_task, audience_research_task, market_analysis_task]
 
@@ -355,43 +355,48 @@ quality_assurance_task:
     CRITICAL: Present the FINAL CONTENT that users can immediately copy and publish.
     This is their content delivery - make it perfect and clear.
   expected_output: >
-    🎉 FINAL PUBLICATION-READY CONTENT DELIVERY:
+    # 🎉 FINAL PUBLICATION-READY CONTENT DELIVERY
     
-    ████████████████████████████████████████████████████████████████
-    █                                                              █
-    █  🚀 YOUR CONTENT IS READY! Copy & paste to publish →        █
-    █                                                              █
-    ████████████████████████████████████████████████████████████████
+    ---
     
-    ===== 📝 FINAL CONTENT =====
+    ## 🚀 YOUR CONTENT IS READY! 
+    ### Copy & paste to publish immediately
+    
+    ---
+    
+    ## 📝 FINAL CONTENT
     [The absolute best, final version of your content - ready to publish immediately]
     
-    ===== 🎯 BEST HEADLINE =====
-    [The most compelling headline selected from all options]
+    ## 🎯 BEST HEADLINE
+    **[The most compelling headline selected from all options]**
     
-    ===== 🏷️ OPTIMAL HASHTAGS =====
-    [Final hashtag selection for maximum reach and engagement]
+    ## 🏷️ OPTIMAL HASHTAGS
+    `[Final hashtag selection for maximum reach and engagement]`
     
-    ===== 📢 FINAL CALL-TO-ACTION =====
-    [The most effective CTA for your goals]
+    ## 📢 FINAL CALL-TO-ACTION
+    > **[The most effective CTA for your goals]**
     
-    ===== 📱 PLATFORM NOTES =====
-    [Any final formatting or posting instructions specific to {platform}]
+    ## 📱 PLATFORM NOTES
+    - [Any final formatting or posting instructions specific to {platform}]
     
-    ===== 🧪 ALTERNATIVE VERSIONS =====
-    [2-3 variations for A/B testing if desired]
+    ## 🧪 ALTERNATIVE VERSIONS
+    1. **Version A:** [Primary variation]
+    2. **Version B:** [Alternative for A/B testing]
+    3. **Version C:** [Additional variation if desired]
     
-    ===== 📊 SUCCESS TIPS =====
-    - Best time to post: [specific timing recommendation]
-    - Engagement strategy: [how to maximize interaction]
-    - Follow-up actions: [next steps after posting]
+    ## 📊 SUCCESS TIPS
+    - **Best time to post:** [specific timing recommendation]
+    - **Engagement strategy:** [how to maximize interaction]
+    - **Follow-up actions:** [next steps after posting]
     
-    ════════════════════════════════════════════════════════════════
-    📋 QUICK COPY-PASTE SECTION:
-    ════════════════════════════════════════════════════════════════
+    ---
+    
+    ### 📋 QUICK COPY-PASTE SECTION
+    ```
     [Clean, formatted version ready for immediate copy/paste]
+    ```
     
-    This is your final content - polished, optimized, and ready to publish!
+    > ✅ **This is your final content - polished, optimized, and ready to publish!**
   agent: quality_assurance_specialist
   context: [content_optimization_task]
 
