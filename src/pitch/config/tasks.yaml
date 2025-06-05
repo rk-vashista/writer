@@ -1,36 +1,496 @@
+# Enhanced Tasks Configuration for AI Content Generator
+
+# Quick Content Generation (Streamlined)
+quick_content_creation_task:
+  description: >
+    CREATE IMMEDIATE, PUBLICATION-READY CONTENT for {platform}:
+    
+    🎯 PRIMARY GOAL: Generate complete, ready-to-publish content that the user can immediately copy and use.
+    
+    CONTENT GENERATION STEPS:
+    1. Quickly analyze {platform} format requirements and best practices
+    2. Understand {target_audience} preferences and pain points
+    3. Write compelling, engaging content about {topic} in {tone} voice
+    4. Create attention-grabbing headlines that stop scrolling
+    5. Include relevant keywords and hashtags naturally
+    6. Add clear, compelling calls-to-action aligned with {content_goals}
+    7. Ensure proper length and format for {platform}
+    8. Create multiple content variations for testing
+    9. Include platform-specific formatting and visual suggestions
+    10. Make content immediately actionable and valuable
+    
+    CRITICAL SUCCESS CRITERIA:
+    - Content must be 100% ready to publish (no editing needed)
+    - Include compelling hook that grabs attention in first 3 seconds
+    - Provide clear value to {target_audience}
+    - Optimize for {platform} algorithm and user behavior
+    - Include social proof elements and engagement triggers
+    
+    DO NOT provide analysis, strategy, or recommendations - CREATE THE ACTUAL CONTENT.
+  expected_output: >
+    🚀 IMMEDIATE PUBLICATION PACKAGE:
+    
+    ===== MAIN CONTENT =====
+    [Complete, ready-to-publish content piece that user can copy/paste immediately]
+    
+    ===== HEADLINE OPTIONS =====
+    1. [Primary headline - most engaging]
+    2. [Alternative headline - different angle]
+    3. [Curiosity-driven headline]
+    4. [Benefit-focused headline]
+    5. [Urgency-based headline]
+    
+    ===== HASHTAGS & KEYWORDS =====
+    Primary: [most important hashtags for reach]
+    Secondary: [supporting hashtags for engagement]
+    Niche: [specific community hashtags]
+    
+    ===== CALL-TO-ACTION OPTIONS =====
+    1. [Direct action CTA]
+    2. [Engagement-focused CTA]
+    3. [Value-driven CTA]
+    
+    ===== PLATFORM OPTIMIZATION =====
+    - Best posting time: [time recommendation]
+    - Visual suggestions: [image/video recommendations]
+    - Engagement strategy: [how to maximize interaction]
+    
+    ===== CONTENT VARIATIONS =====
+    Version A: [Main version]
+    Version B: [Alternative approach for A/B testing]
+    
+    This is ACTUAL CONTENT ready for immediate publication - not strategy or analysis.
+  agent: content_creator
+
+# Phase 1: Research & Strategy Development
+audience_research_task:
+  description: >
+    QUICKLY research {target_audience} on {platform} to inform immediate content creation:
+    1. Identify key pain points and interests of {target_audience}
+    2. Determine what content formats perform best for this audience on {platform}
+    3. Find the most engaging topics and emotional triggers
+    4. Identify optimal posting times and hashtags they respond to
+    5. Note their language style and communication preferences
+    6. Determine what makes them share and engage with content
+    7. Focus on actionable insights for immediate content optimization
+  expected_output: >
+    ACTIONABLE AUDIENCE INSIGHTS (not a report):
+    - Top 3 pain points: [specific pain points to address]
+    - Best content formats: [what formats work best]
+    - Engagement triggers: [what makes them respond]
+    - Language style: [how they prefer to be communicated with]
+    - Best hashtags: [hashtags this audience follows]
+    - Posting times: [when they're most active]
+    
+    These insights will be used to create better content immediately.
+  agent: audience_researcher
+
+market_analysis_task:
+  description: >
+    QUICKLY analyze what's working on {platform} for {topic} to inform content creation:
+    1. Find 3-5 top-performing posts about {topic} on {platform}
+    2. Identify the most effective hashtags and keywords currently trending
+    3. Note what content formats are getting the most engagement
+    4. Find the best hooks and opening lines that are working
+    5. Identify what call-to-actions are driving results
+    6. Note optimal content length and posting patterns
+    7. Find content gaps or opportunities to stand out
+  expected_output: >
+    ACTIONABLE MARKET INSIGHTS (not a report):
+    - Trending hashtags: [current best-performing hashtags]
+    - Best content formats: [what's working now]
+    - Winning hooks: [opening lines that grab attention]
+    - Effective CTAs: [calls-to-action that get results]
+    - Content opportunities: [gaps to exploit]
+    - Optimal length: [ideal content length]
+    
+    These insights will be applied to create better content immediately.
+  agent: platform_specialist
+  context: [audience_research_task]
+
 content_strategy_task:
   description: >
-    Plan content strategy for {platform} based on:
-    1. Platform: {platform}
-    2. Content Type: {content_type}
-    3. Topic: {topic}
-    4. Tone: {tone}
-    5. Target Audience: {target_audience}
-    6. Goals: {content_goals}
+    CREATE STRATEGIC CONTENT GUIDELINES (not a strategy document) for immediate use:
+    1. Define 3-5 key content themes for {topic} on {platform}
+    2. Set the exact tone and voice style to use for {target_audience}
+    3. Create content structure template for optimal performance
+    4. Define success metrics and what to track
+    5. Create content series ideas and follow-up opportunities
+    6. Set engagement and growth targets
+    7. Define the specific approach for this content piece
+    
+    FOCUS: Create actionable guidelines that will be used to create actual content now.
   expected_output: >
-    A detailed content strategy including tone, structure, and key points to cover.
+    CONTENT CREATION GUIDELINES (not strategy):
+    - Content themes: [3-5 key themes to focus on]
+    - Voice/tone: [exact style to use]
+    - Content structure: [template to follow]
+    - Key messages: [main points to communicate]
+    - Success metrics: [what to measure]
+    - Series opportunities: [follow-up content ideas]
+    
+    These guidelines will be used immediately for content creation.
   agent: content_strategist
+  context: [audience_research_task, market_analysis_task]
+
+# Phase 2: Content Creation & Optimization
+seo_optimization_task:
+  description: >
+    PROVIDE IMMEDIATE SEO OPTIMIZATION ELEMENTS for content creation:
+    1. Research and provide 10-15 high-impact keywords for {topic} and {platform}
+    2. Find trending hashtags that are currently performing well
+    3. Provide optimal content structure guidelines for platform algorithms
+    4. Give specific keyword density recommendations
+    5. Provide related terms and semantic keywords to include
+    6. Give title/headline optimization suggestions
+    
+    DELIVER: Actual keywords and hashtags to use, not analysis.
+  expected_output: >
+    SEO OPTIMIZATION PACKAGE (ready to use):
+    - Primary keywords: [5 main keywords to target]
+    - Secondary keywords: [10 supporting keywords]
+    - Trending hashtags: [15-20 current hashtags]
+    - Title keywords: [power words for headlines]
+    - Content structure: [optimal format for algorithms]
+    - Keyword placement: [where to put keywords]
+    
+    These elements will be directly integrated into the content.
+  agent: seo_specialist
+
+brand_voice_calibration_task:
+  description: >
+    PROVIDE IMMEDIATE BRAND VOICE GUIDELINES for content creation:
+    1. Define exact tone and voice style for {tone} and {target_audience}
+    2. Create specific phrases and expressions to use
+    3. Provide do's and don'ts for this content piece
+    4. Give examples of how to communicate key messages
+    5. Ensure consistency with {platform} communication style
+    
+    DELIVER: Specific voice guidelines to use immediately, not analysis.
+  expected_output: >
+    BRAND VOICE GUIDELINES (ready to apply):
+    - Tone style: [specific tone to use]
+    - Key phrases: [expressions that fit the brand]
+    - Communication style: [how to structure messages]
+    - Words to use: [power words and preferred vocabulary]
+    - Words to avoid: [terms that don't fit]
+    - Example sentences: [sample expressions in the right tone]
+    
+    These guidelines will be applied directly to content creation.
+  agent: brand_voice_guardian
 
 content_creation_task:
   description: >
-    Create content following the strategy for {platform} that:
-    1. Matches the defined tone and style
-    2. Is optimized for the platform
-    3. Incorporates key messages and points
-    4. Follows platform best practices
-    5. Includes relevant hashtags or keywords
+    Create compelling, platform-optimized content following established strategy:
+    1. Write the complete, final content piece ready for publication
+    2. Create attention-grabbing headlines and hooks that stop scrolling
+    3. Include relevant keywords and hashtags naturally integrated
+    4. Structure content for maximum engagement and readability
+    5. Add clear calls-to-action aligned with {content_goals}
+    6. Ensure content length and format match {platform} requirements
+    7. Include specific examples, stories, or actionable insights
+    8. Create engaging opening that hooks the audience immediately
+    9. Develop compelling body content that delivers value
+    10. End with strong conclusion and clear next steps
+    11. Provide alternative headlines and variations for testing
+    12. Include platform-specific formatting and visual content suggestions
+    
+    IMPORTANT: You must produce the actual, complete, ready-to-publish content - 
+    not just a plan or outline. Write the full post, article, or content piece 
+    that can be immediately copied and used on {platform}.
   expected_output: >
-    Platform-optimized content ready for review
+    Complete, publication-ready content including:
+    - Main content piece (full text/copy)
+    - 3-5 headline variations
+    - Relevant hashtags and keywords
+    - Call-to-action options
+    - Platform-specific formatting notes
+    - Visual content suggestions
+    - Alternative versions for A/B testing
+    
+    The output should be the actual content that can be immediately published,
+    not analysis or recommendations about content.
   agent: content_creator
+  context: [content_strategy_task, seo_optimization_task, brand_voice_calibration_task]
 
+viral_potential_analysis_task:
+  description: >
+    ENHANCE CONTENT for maximum viral potential and provide specific improvements:
+    1. Review the created content and identify viral enhancement opportunities
+    2. Provide specific headline improvements that increase shareability
+    3. Suggest emotional triggers to add for better engagement
+    4. Recommend timing and posting strategy optimizations
+    5. Provide specific visual content suggestions
+    6. Give hashtag strategy refinements for maximum reach
+    7. Suggest community engagement tactics
+    
+    DELIVER: Specific content improvements, not analysis.
+  expected_output: >
+    VIRAL ENHANCEMENT PACKAGE (specific improvements):
+    - Improved headlines: [3-5 more viral headline options]
+    - Emotional triggers: [specific elements to add]
+    - Shareability boosters: [elements that increase sharing]
+    - Visual suggestions: [specific image/video ideas]
+    - Hashtag refinements: [optimized hashtag combinations]
+    - Engagement hooks: [specific ways to drive interaction]
+    - Timing optimization: [best posting times and strategies]
+    
+    These improvements will be applied to maximize viral potential.
+  agent: viral_content_analyst
+
+# Phase 3: GitHub-Specific Tasks (when applicable)
+github_analysis_task:
+  description: >
+    Analyze GitHub repository for content creation (when platform is GitHub):
+    1. Analyze repository structure, code quality, and documentation
+    2. Identify key features, technologies, and use cases
+    3. Research similar repositories and competitive landscape
+    4. Analyze current repository metrics and community engagement
+    5. Identify unique selling points and differentiation factors
+    6. Research target developer audience and their needs
+    7. Analyze existing README, documentation, and marketing materials
+    8. Identify opportunities for improved discoverability
+  expected_output: >
+    Comprehensive repository analysis with insights for content creation,
+    including technical highlights, market positioning, and optimization opportunities
+  agent: github_specialist
+  condition: platform == "github"
+
+github_content_creation_task:
+  description: >
+    Create GitHub-specific content based on repository analysis:
+    1. Generate compelling repository descriptions that highlight value
+    2. Create comprehensive tag recommendations for discoverability
+    3. Suggest README improvements and documentation enhancements
+    4. Develop marketing copy for developer audiences
+    5. Create technical content that showcases capabilities
+    6. Generate contribution guidelines and community content
+    7. Develop release notes and changelog templates
+    8. Create developer-focused social media content
+  expected_output: >
+    Complete GitHub content package including descriptions, tags,
+    documentation improvements, and marketing materials
+  agent: github_specialist
+  context: [github_analysis_task]
+
+# Phase 4: Quality Assurance & Optimization
 content_optimization_task:
   description: >
-    Optimize the content based on:
-    1. User feedback: {feedback}
-    2. Platform requirements
-    3. Engagement goals
-    4. Best practices
-    5. SEO guidelines (if applicable)
+    ENHANCE THE INITIAL CONTENT with research-driven improvements:
+    
+    🎯 GOAL: Take the initial content and make it significantly better using audience insights and market research.
+    
+    ENHANCEMENT PROCESS:
+    1. Review the initial content created in the quick generation phase
+    2. Apply audience research insights to improve relevance and appeal
+    3. Incorporate market analysis findings to increase competitive advantage
+    4. Enhance engagement elements based on platform best practices
+    5. Strengthen hooks and headlines using psychological triggers
+    6. Optimize content structure for better readability and flow
+    7. Add social proof elements and credibility indicators
+    8. Implement advanced SEO and hashtag strategies
+    9. Create more sophisticated call-to-action approaches
+    10. Develop multiple content variations for different audience segments
+    
+    CRITICAL: You must output the actual IMPROVED CONTENT, not analysis.
+    Rewrite and enhance the content to be significantly better.
   expected_output: >
-    Refined and optimized content incorporating feedback
+    🚀 ENHANCED CONTENT PACKAGE (Improved Version):
+    
+    ===== OPTIMIZED MAIN CONTENT =====
+    [Significantly improved version of the initial content - ready to publish]
+    
+    ===== ENHANCED HEADLINES =====
+    1. [Psychologically optimized headline]
+    2. [Data-driven alternative]
+    3. [Audience-specific version]
+    4. [Algorithm-optimized version]
+    5. [Conversion-focused headline]
+    
+    ===== ADVANCED HASHTAG STRATEGY =====
+    Trending: [current trending hashtags]
+    Niche: [community-specific tags]
+    Branded: [brand/campaign hashtags]
+    Long-tail: [specific audience hashtags]
+    
+    ===== SOPHISTICATED CTAs =====
+    1. [Psychology-based CTA]
+    2. [Urgency-driven CTA]
+    3. [Community-building CTA]
+    4. [Value-stacking CTA]
+    
+    ===== AUDIENCE VARIATIONS =====
+    Version 1: [For primary audience segment]
+    Version 2: [For secondary audience segment]
+    Version 3: [For niche audience segment]
+    
+    ===== ENGAGEMENT STRATEGY =====
+    - Optimal posting timing based on audience data
+    - Engagement hooks for comments/shares
+    - Follow-up content recommendations
+    
+    This is the IMPROVED, RESEARCH-ENHANCED content ready for publication.
   agent: content_optimizer
+  context: [quick_content_creation_task, audience_research_task, market_analysis_task]
+
+quality_assurance_task:
+  description: >
+    DELIVER THE FINAL, PERFECTED CONTENT PACKAGE:
+    
+    🎯 MISSION: Perform final quality control and present the best content version for immediate publication.
+    
+    FINAL QUALITY PROCESS:
+    1. Review all content versions (initial + enhanced)
+    2. Select the best-performing content elements
+    3. Verify factual accuracy and source credibility
+    4. Perfect grammar, spelling, and style consistency
+    5. Ensure brand guidelines compliance
+    6. Verify platform-specific formatting requirements
+    7. Check for legal compliance and content safety
+    8. Validate all hashtags and mentions for accuracy
+    9. Ensure calls-to-action are compelling and clear
+    10. Format everything for immediate publication
+    11. Create clear presentation for the user
+    
+    CRITICAL: Present the FINAL CONTENT that users can immediately copy and publish.
+    This is their content delivery - make it perfect and clear.
+  expected_output: >
+    🎉 FINAL PUBLICATION-READY CONTENT DELIVERY:
+    
+    ████████████████████████████████████████████████████████████████
+    █                                                              █
+    █  🚀 YOUR CONTENT IS READY! Copy & paste to publish →        █
+    █                                                              █
+    ████████████████████████████████████████████████████████████████
+    
+    ===== 📝 FINAL CONTENT =====
+    [The absolute best, final version of your content - ready to publish immediately]
+    
+    ===== 🎯 BEST HEADLINE =====
+    [The most compelling headline selected from all options]
+    
+    ===== 🏷️ OPTIMAL HASHTAGS =====
+    [Final hashtag selection for maximum reach and engagement]
+    
+    ===== 📢 FINAL CALL-TO-ACTION =====
+    [The most effective CTA for your goals]
+    
+    ===== 📱 PLATFORM NOTES =====
+    [Any final formatting or posting instructions specific to {platform}]
+    
+    ===== 🧪 ALTERNATIVE VERSIONS =====
+    [2-3 variations for A/B testing if desired]
+    
+    ===== 📊 SUCCESS TIPS =====
+    - Best time to post: [specific timing recommendation]
+    - Engagement strategy: [how to maximize interaction]
+    - Follow-up actions: [next steps after posting]
+    
+    ════════════════════════════════════════════════════════════════
+    📋 QUICK COPY-PASTE SECTION:
+    ════════════════════════════════════════════════════════════════
+    [Clean, formatted version ready for immediate copy/paste]
+    
+    This is your final content - polished, optimized, and ready to publish!
+  agent: quality_assurance_specialist
+  context: [content_optimization_task]
+
+# Phase 5: Performance Planning & Follow-up
+performance_planning_task:
+  description: >
+    PROVIDE IMMEDIATE PERFORMANCE OPTIMIZATION RECOMMENDATIONS:
+    1. Define specific success metrics to track for this content
+    2. Create simple A/B testing variations
+    3. Provide monitoring schedule and what to watch for
+    4. Give follow-up content ideas based on performance
+    5. Create response templates for common interactions
+    6. Provide performance benchmarks to compare against
+    7. Give specific optimization actions based on results
+    
+    DELIVER: Actionable performance guidelines, not strategy documents.
+  expected_output: >
+    PERFORMANCE OPTIMIZATION PACKAGE:
+    - Success metrics: [specific KPIs to track]
+    - A/B test variations: [2-3 content variations to test]
+    - Monitoring schedule: [when and what to check]
+    - Response templates: [ready-to-use reply templates]
+    - Benchmark targets: [performance goals to aim for]
+    - Optimization actions: [what to do based on results]
+    - Follow-up content: [next content ideas based on performance]
+    
+    These guidelines will help optimize content performance immediately.
+  agent: content_optimizer
+  context: [quality_assurance_task]
+
+# Conditional Tasks Based on Feedback
+feedback_analysis_task:
+  description: >
+    IMMEDIATELY IMPLEMENT FEEDBACK to improve content:
+    1. Review specific feedback provided: {feedback}
+    2. Identify what needs to be changed or improved
+    3. Determine successful elements to keep
+    4. Apply changes to create better content version
+    5. Test alternative approaches based on feedback
+    6. Optimize content for better audience reception
+    7. Maintain brand voice while implementing improvements
+    
+    DELIVER: Improved content incorporating feedback, not analysis.
+  expected_output: >
+    IMPROVED CONTENT based on feedback:
+    - Updated content: [revised version implementing feedback]
+    - Key changes made: [what was improved and why]
+    - Alternative versions: [2-3 variations addressing feedback]
+    - Maintained elements: [successful parts that were kept]
+    - Further optimizations: [additional improvements made]
+    
+    This is the improved content ready for publication.
+  agent: content_optimizer
+  condition: feedback is provided
+
+content_iteration_task:
+  description: >
+    CREATE IMPROVED CONTENT VERSION based on feedback:
+    1. Take the feedback and rewrite the content to be better
+    2. Keep successful elements that are working
+    3. Fix any issues mentioned in the feedback
+    4. Create alternative versions for testing
+    5. Write better headlines and hooks
+    6. Improve engagement elements
+    7. Maintain the same brand voice and style
+    
+    DELIVER: Actual improved content, not recommendations.
+  expected_output: >
+    IMPROVED CONTENT READY TO PUBLISH:
+    - Revised content: [complete rewritten version based on feedback]
+    - Alternative headlines: [3-5 new headline options]
+    - Enhanced CTAs: [improved call-to-action options]
+    - A/B versions: [2-3 content variations]
+    - Key improvements: [what was changed and enhanced]
+    
+    This is the improved content ready for immediate publication.
+  agent: content_creator
+  context: [feedback_analysis_task]
+
+direct_content_creation_task:
+  description: >
+    CREATE IMMEDIATE CONTENT when user provides specific requirements:
+    1. Write complete, ready-to-publish content based on user specifications
+    2. Match the target audience, platform, and content type requested
+    3. Include key messages, tone, and style as specified
+    4. Integrate any mandatory elements (keywords, hashtags) naturally
+    5. Meet content length and format specifications exactly
+    6. Focus on desired outcomes and success metrics
+    7. Avoid any topics or angles user wants to avoid
+    8. Create engaging headlines and strong calls-to-action
+    
+    DELIVER: Complete content ready for immediate publication.
+  expected_output: >
+    PUBLICATION-READY CONTENT:
+    - Main content: [complete content piece ready to publish]
+    - Headlines: [5 compelling headline options]
+    - Hashtags: [relevant hashtags for the platform]
+    - Call-to-actions: [3 CTA variations]
+    - Platform notes: [any specific formatting for the platform]
+    
+    This content is ready to copy and paste for immediate publication.
+  agent: content_creator

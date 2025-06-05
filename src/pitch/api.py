@@ -34,7 +34,8 @@ async def generate_content(
     content_goals: str,
     github_token: str = None,
     repo_url: str = None,
-    feedback: str = None
+    feedback: str = None,
+    quick_mode: bool = False
 ):
     """Background task to generate content"""
     generator = ContentGenerator()
@@ -83,7 +84,9 @@ async def generate_content(
 
         # Run tasks and send updates
         try:
-            result = generator.crew().kickoff(inputs=inputs)
+            # Create a dynamic crew based on platform, feedback, and mode
+            dynamic_crew = generator.create_dynamic_crew(platform=platform, feedback=feedback, quick_mode=quick_mode)
+            result = dynamic_crew.kickoff(inputs=inputs)
             
             # Convert CrewOutput to string if needed
             result_text = str(result) if result else ""
@@ -125,7 +128,8 @@ async def create_content(
     content_goals: str = Form(...),
     github_token: Optional[str] = Form(None),
     repo_url: Optional[str] = Form(None),
-    feedback: Optional[str] = Form(None)
+    feedback: Optional[str] = Form(None),
+    quick_mode: bool = Form(False)
 ):
     """
     Generate content based on provided parameters
@@ -152,7 +156,8 @@ async def create_content(
         content_goals=content_goals,
         github_token=github_token,
         repo_url=repo_url,
-        feedback=feedback
+        feedback=feedback,
+        quick_mode=quick_mode
     )
 
     return {
