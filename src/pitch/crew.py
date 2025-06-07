@@ -298,7 +298,7 @@ class ContentGenerator():
             self.content_optimization_task(),    # Apply research to enhance content
             
             # 🎨 PHASE 4: FINAL CONTENT DELIVERY (MUST BE LAST!)
-            self.quality_assurance_task(),       # Final quality check with enhanced content
+            self.quality_assurance_task(),       # Final quality check - delivers ONLY content
         ]
         
         # Add GitHub-specific tasks if platform is GitHub
@@ -313,16 +313,17 @@ class ContentGenerator():
         
         # Add feedback-based tasks if feedback is provided
         if feedback and feedback.strip():
-            task_list.extend([
+            # Insert feedback tasks before quality assurance
+            feedback_tasks = [
                 self.feedback_analysis_task(),
                 self.content_iteration_task()
-            ])
+            ]
+            # Insert before the quality assurance task (which should always be last)
+            task_list = task_list[:-1] + feedback_tasks + [task_list[-1]]
         
-        # NOTE: Performance planning, SEO, viral analysis etc. are REMOVED from default flow
-        # These were causing strategy/analysis outputs instead of actual content
-        # The quality_assurance_task is the FINAL task that delivers the actual content
-        
-        return task_list
+        # NOTE: The quality_assurance_task is specifically configured to return 
+        # ONLY the final content without any analysis, strategy, or formatting
+        # It must always be the LAST task in the sequence
         
         return task_list
 

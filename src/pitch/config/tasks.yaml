@@ -5,61 +5,27 @@ quick_content_creation_task:
   description: >
     CREATE IMMEDIATE, PUBLICATION-READY CONTENT for {platform}:
     
-    🎯 PRIMARY GOAL: Generate complete, ready-to-publish content that the user can immediately copy and use.
+    🎯 CRITICAL: Generate actual content that can be copied and pasted directly to {platform}.
     
-    CONTENT GENERATION STEPS:
-    1. Quickly analyze {platform} format requirements and best practices
-    2. Understand {target_audience} preferences and pain points
-    3. Write compelling, engaging content about {topic} in {tone} voice
-    4. Create attention-grabbing headlines that stop scrolling
-    5. Include relevant keywords and hashtags naturally
-    6. Add clear, compelling calls-to-action aligned with {content_goals}
-    7. Ensure proper length and format for {platform}
-    8. Create multiple content variations for testing
-    9. Include platform-specific formatting and visual suggestions
-    10. Make content immediately actionable and valuable
+    CONTENT REQUIREMENTS:
+    1. Write compelling content about {topic} for {target_audience}
+    2. Use {tone} voice and align with {content_goals}
+    3. Include an attention-grabbing headline/opening
+    4. Write the main content body (appropriate length for {platform})
+    5. Add relevant hashtags
+    6. Include a clear call-to-action
+    7. Format for immediate publication on {platform}
     
-    CRITICAL SUCCESS CRITERIA:
-    - Content must be 100% ready to publish (no editing needed)
-    - Include compelling hook that grabs attention in first 3 seconds
-    - Provide clear value to {target_audience}
-    - Optimize for {platform} algorithm and user behavior
-    - Include social proof elements and engagement triggers
+    ABSOLUTELY NO:
+    - Analysis or strategy discussion
+    - Meta-commentary about the content
+    - Multiple versions or options
+    - Technical formatting instructions
+    - System messages or headers
     
-    DO NOT provide analysis, strategy, or recommendations - CREATE THE ACTUAL CONTENT.
+    RETURN ONLY: The actual content as it should appear when published.
   expected_output: >
-    # 🚀 IMMEDIATE PUBLICATION PACKAGE
-    
-    ## 📝 MAIN CONTENT
-    [Complete, ready-to-publish content piece that user can copy/paste immediately]
-    
-    ## 📰 HEADLINE OPTIONS
-    1. **[Primary headline - most engaging]**
-    2. [Alternative headline - different angle]
-    3. [Curiosity-driven headline]
-    4. [Benefit-focused headline]
-    5. [Urgency-based headline]
-    
-    ## 🏷️ HASHTAGS & KEYWORDS
-    **Primary:** [most important hashtags for reach]
-    **Secondary:** [supporting hashtags for engagement]
-    **Niche:** [specific community hashtags]
-    
-    ## 📢 CALL-TO-ACTION OPTIONS
-    1. **[Direct action CTA]**
-    2. [Engagement-focused CTA]
-    3. [Value-driven CTA]
-    
-    ## ⚡ PLATFORM OPTIMIZATION
-    - **Best posting time:** [time recommendation]
-    - **Visual suggestions:** [image/video recommendations]
-    - **Engagement strategy:** [how to maximize interaction]
-    
-    ## 🧪 CONTENT VARIATIONS
-    **Version A:** [Main version]
-    **Version B:** [Alternative approach for A/B testing]
-    
-    > ✅ This is ACTUAL CONTENT ready for immediate publication - not strategy or analysis.
+    [Write the actual content here - headline, main content, hashtags, and CTA exactly as it should appear when published on {platform}]
   agent: content_creator
 
 # Phase 1: Research & Strategy Development
@@ -276,7 +242,7 @@ github_content_creation_task:
 # Phase 4: Quality Assurance & Optimization
 content_optimization_task:
   description: >
-    ENHANCE THE INITIAL CONTENT with research-driven improvements:
+    ENHANCE THE INITIAL CONTENT and output the final, clean content ready for publication.
     
     🎯 GOAL: Take the initial content and make it significantly better using audience insights and market research.
     
@@ -290,113 +256,47 @@ content_optimization_task:
     7. Add social proof elements and credibility indicators
     8. Implement advanced SEO and hashtag strategies
     9. Create more sophisticated call-to-action approaches
-    10. Develop multiple content variations for different audience segments
     
-    CRITICAL: You must output the actual IMPROVED CONTENT, not analysis.
-    Rewrite and enhance the content to be significantly better.
+    CRITICAL: You must output the actual IMPROVED CONTENT ready for publication, not sections or analysis.
+    Write it as a complete piece that can be copied and pasted directly to {platform}.
   expected_output: >
-    # 🚀 ENHANCED CONTENT PACKAGE (Improved Version)
-    
     ## 📝 OPTIMIZED MAIN CONTENT
-    [Significantly improved version of the initial content - ready to publish]
     
-    ## 🎯 ENHANCED HEADLINES
-    1. **[Psychologically optimized headline]**
-    2. [Data-driven alternative]
-    3. [Audience-specific version]
-    4. [Algorithm-optimized version]
-    5. [Conversion-focused headline]
+    [Write the complete, enhanced content piece here - as it should appear when published on {platform}. 
+    Include the headline, main content body, relevant hashtags, and call-to-action. This should be the 
+    actual content users will copy and paste, not instructions or analysis.]
     
-    ## 🏷️ ADVANCED HASHTAG STRATEGY
-    **Trending:** [current trending hashtags]
-    **Niche:** [community-specific tags]
-    **Branded:** [brand/campaign hashtags]
-    **Long-tail:** [specific audience hashtags]
+    ## 🎯 ALTERNATIVE HEADLINES (for testing)
+    1. [Alternative headline option 1]
+    2. [Alternative headline option 2] 
+    3. [Alternative headline option 3]
     
-    ## 📢 SOPHISTICATED CTAs
-    1. **[Psychology-based CTA]**
-    2. [Urgency-driven CTA]
-    3. [Community-building CTA]
-    4. [Value-stacking CTA]
-    
-    ## 👥 AUDIENCE VARIATIONS
-    **Version 1:** [For primary audience segment]
-    **Version 2:** [For secondary audience segment]
-    **Version 3:** [For niche audience segment]
-    
-    ## ⚡ ENGAGEMENT STRATEGY
-    - **Optimal posting timing:** based on audience data
-    - **Engagement hooks:** for comments/shares
-    - **Follow-up content:** recommendations
-    
-    > ✅ This is the IMPROVED, RESEARCH-ENHANCED content ready for publication.
+    ## 🏷️ HASHTAG OPTIONS
+    Primary: [main hashtags to use]
+    Alternatives: [backup hashtag options]
   agent: content_optimizer
   context: [quick_content_creation_task, audience_research_task, market_analysis_task]
 
 quality_assurance_task:
   description: >
-    DELIVER THE FINAL, PERFECTED CONTENT PACKAGE:
+    YOU ARE A CONTENT CLEANER. Your ONLY job is to find the best actual content from previous tasks and output it cleanly.
     
-    🎯 MISSION: Perform final quality control and present the best content version for immediate publication.
+    STEP 1: Look through all previous task outputs
+    STEP 2: Find the actual content piece (headline + main content + hashtags + call-to-action)
+    STEP 3: Copy that content exactly as it should appear when published
+    STEP 4: Remove any meta-commentary, headers, or analysis
     
-    FINAL QUALITY PROCESS:
-    1. Review all content versions (initial + enhanced)
-    2. Select the best-performing content elements
-    3. Verify factual accuracy and source credibility
-    4. Perfect grammar, spelling, and style consistency
-    5. Ensure brand guidelines compliance
-    6. Verify platform-specific formatting requirements
-    7. Check for legal compliance and content safety
-    8. Validate all hashtags and mentions for accuracy
-    9. Ensure calls-to-action are compelling and clear
-    10. Format everything for immediate publication
-    11. Create clear presentation for the user
+    DO NOT:
+    - Analyze anything
+    - Add commentary
+    - Use markdown headers (##, ###)
+    - Include brackets like [HEADLINE] or [HASHTAGS]
+    - Add strategy notes or tips
+    - Explain what you're doing
     
-    CRITICAL: Present the FINAL CONTENT that users can immediately copy and publish.
-    This is their content delivery - make it perfect and clear.
+    SIMPLY OUTPUT: The clean content ready to post, nothing else.
   expected_output: >
-    # 🎉 FINAL PUBLICATION-READY CONTENT DELIVERY
-    
-    ---
-    
-    ## 🚀 YOUR CONTENT IS READY! 
-    ### Copy & paste to publish immediately
-    
-    ---
-    
-    ## 📝 FINAL CONTENT
-    [The absolute best, final version of your content - ready to publish immediately]
-    
-    ## 🎯 BEST HEADLINE
-    **[The most compelling headline selected from all options]**
-    
-    ## 🏷️ OPTIMAL HASHTAGS
-    `[Final hashtag selection for maximum reach and engagement]`
-    
-    ## 📢 FINAL CALL-TO-ACTION
-    > **[The most effective CTA for your goals]**
-    
-    ## 📱 PLATFORM NOTES
-    - [Any final formatting or posting instructions specific to {platform}]
-    
-    ## 🧪 ALTERNATIVE VERSIONS
-    1. **Version A:** [Primary variation]
-    2. **Version B:** [Alternative for A/B testing]
-    3. **Version C:** [Additional variation if desired]
-    
-    ## 📊 SUCCESS TIPS
-    - **Best time to post:** [specific timing recommendation]
-    - **Engagement strategy:** [how to maximize interaction]
-    - **Follow-up actions:** [next steps after posting]
-    
-    ---
-    
-    ### 📋 QUICK COPY-PASTE SECTION
-    ```
-    [Clean, formatted version ready for immediate copy/paste]
-    ```
-    
-    > ✅ **This is your final content - polished, optimized, and ready to publish!**
+    [The actual content as it should appear when posted - headline, main text, hashtags, and call-to-action, with no additional formatting or commentary]
   agent: quality_assurance_specialist
   context: [content_optimization_task]
 

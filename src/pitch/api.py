@@ -145,10 +145,91 @@ async def generate_content(
             # Check if the result looks like a task description instead of content
             if any(phrase in result_text.lower() for phrase in [
                 'performance benchmarks', 'key performance indicators', 
-                'strategic actions', 'outlined', 'analysis', 'recommendations'
+                'strategic actions', 'outlined', 'analysis', 'recommendations',
+                'final publication-ready content delivery', 'your content is ready',
+                'copy & paste to publish', '🎉', 'system error', 'alternative versions',
+                'success tips', 'quick copy-paste section', 'this is your final content',
+                'i now know the final answer', 'task completed', 'content package'
             ]):
                 print("⚠️ Warning: Result appears to be strategy/analysis instead of content")
-                result_text = f"⚠️ SYSTEM ERROR: The AI returned strategy analysis instead of actual content.\n\nReceived: {result_text}\n\nPlease try again - the system should deliver ready-to-publish content, not analysis."
+                
+                # Try to extract actual content from the formatted response
+                content_extracted = False
+                
+                # Look for actual content patterns in the text
+                import re
+                
+                # More comprehensive patterns to extract clean content
+                content_patterns = [
+                    # Look for content in the content_optimization_task or content_creation_task output
+                    r'## 📝 (?:OPTIMIZED MAIN CONTENT|MAIN CONTENT)\s*\n(.*?)(?=##|\n\n(?:\*\*|##)|\Z)',
+                    r'## 📝 FINAL CONTENT\s*\n(.*?)(?=##|\n\n(?:\*\*|##)|\Z)',
+                    # Look for content after specific markers
+                    r'(?:Main content piece|Complete content piece).*?\n(.*?)(?=\n(?:-|#|\*\*)|Headlines?:|Hashtags?:|\Z)',
+                    # Look for full post/article content
+                    r'(?:FINAL CONTENT|MAIN CONTENT|OPTIMIZED CONTENT).*?\n\n(.*?)(?=\n\n(?:##|Headlines?|Hashtags?)|\Z)',
+                    # Look for content that starts with an engaging hook
+                    r'\n\n([🎯🚀💡✨🔥].*?(?:\n.*?)*?)(?=\n\n(?:##|Headlines?|Hashtags?|\*\*|\Z))',
+                    # Look for longer content blocks (main body)
+                    r'\n\n([A-Z].*?(?:\n.*?)*?)(?=\n\n(?:##|Headlines?|Hashtags?|\*\*|\Z))',
+                ]
+                
+                for pattern in content_patterns:
+                    match = re.search(pattern, result_text, re.DOTALL | re.IGNORECASE)
+                    if match:
+                        extracted_content = match.group(1).strip()
+                        # Validate the extracted content - should be substantial and look like actual content
+                        if (len(extracted_content) > 100 and 
+                            not any(meta in extracted_content.lower() for meta in [
+                                'analysis', 'strategy', 'publication package', 'alternative versions',
+                                'success tips', 'copy-paste section', 'this is your final',
+                                'trending hashtags:', 'enhanced headlines:', 'sophisticated ctas:'
+                            ]) and
+                            not extracted_content.startswith('##') and
+                            not extracted_content.startswith('[') and
+                            not extracted_content.startswith('**Version') and
+                            # Should look like actual content (has sentences, not just bullet points)
+                            len(extracted_content.split('.')) > 2):
+                            result_text = extracted_content
+                            content_extracted = True
+                            print(f"✅ Extracted content using pattern: {result_text[:100]}...")
+                            break
+                
+                # If still no good content found, try finding the largest meaningful text block
+                if not content_extracted:
+                    # Split by paragraphs and find substantial content blocks
+                    paragraphs = result_text.split('\n\n')
+                    best_content = ""
+                    
+                    for paragraph in paragraphs:
+                        paragraph = paragraph.strip()
+                        # Skip headers, instructions, and meta-content
+                        if (len(paragraph) > 150 and 
+                            not paragraph.startswith('#') and 
+                            not paragraph.startswith('[') and
+                            not paragraph.startswith('**Version') and
+                            not paragraph.startswith('TRENDING:') and
+                            not paragraph.startswith('NICHE:') and
+                            not paragraph.lower().startswith('alternative versions') and
+                            not any(meta in paragraph.lower() for meta in [
+                                'final publication-ready', 'your content is ready', 
+                                'copy & paste', 'alternative versions', 'success tips',
+                                'enhanced headlines', 'sophisticated ctas', 'engagement strategy'
+                            ]) and
+                            # Should have sentence structure
+                            paragraph.count('.') > 1 and
+                            paragraph.count(' ') > 20):  # Should be substantial text
+                            if len(paragraph) > len(best_content):
+                                best_content = paragraph
+                    
+                    if best_content:
+                        result_text = best_content
+                        content_extracted = True
+                        print(f"✅ Extracted best content block: {result_text[:100]}...")
+                
+                # If extraction still failed, provide error message
+                if not content_extracted:
+                    result_text = f"⚠️ CONTENT GENERATION ERROR: The system returned formatting/analysis instead of actual content.\n\nReceived: {result_text[:200]}...\n\nPlease try regenerating with different parameters."
             
             print(f"\n✅ Final result length: {len(result_text)} characters")
             print(f"✅ Final result preview: {result_text[:200]}...")
